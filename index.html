@@ -9,23 +9,10 @@
     height: 100vh;
     position: relative;
   }
-
-  .background-main {
-    background: url(color.jpg);
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-  }
-
-  .text-main {
-    background: url(b&w.jpg);
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-
-    background-attachment: fixed;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .fixed {
@@ -43,15 +30,44 @@
     left: 40px;
   }
 
+  .background--light {
+    color: #000;
+  }
+  .background--dark {
+    color: #fff;
+  }
+
 </style>
 </head>
 <body>
   <div class="container background-main fixed">
+    <img class="background-img" src="color.jpg">
   </div>
   <div class="container background-main">
-    <div class="text text-main">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</div>
+    <div class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</div>
   </div>
   <div class="container">
-    <div class="text text-main">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</div>
+    <div class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</div>
   </div>
+  <script src="background-check.js"></script>
+  <script>
+    window.onload = () => {
+      let texts = document.getElementsByClassName('text');
+      [].forEach.call(texts, (text) => {
+        let innerHTML = text.innerHTML;
+        let chars = innerHTML.split('');
+
+        let newInner = '';
+        chars.forEach((char) => {
+          newInner += `<span class="text-frag">${char}</span>`;
+        })
+
+        text.innerHTML = newInner;
+      });
+      BackgroundCheck.init({
+        targets: '.text-frag',
+        images: '.background-img',
+      });
+    }
+  </script>
 </body>
