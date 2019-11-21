@@ -19,14 +19,15 @@
     position: fixed;
     left: 0;
     top: 0;
-    z-index: -1;
+    z-index: 1;
   }
 
   .text-wrapper {
     font-family: sans-serif;
-    font-size: 24px;
-    position: absolute;
+    font-size: 48px;
+    position: fixed;
     bottom: 40px;
+    width: calc(100% - 40px * 2);
     left: 40px;
   }
 
@@ -40,49 +41,71 @@
 </style>
 </head>
 <body>
-  <div class="container background-main fixed">
-    <img class="background-img" src="color.jpg">
-  </div>
-  <div class="container background-main">
+  <div class="container fixed">
     <div class="text-wrapper">
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
+      <p class="text" id="entry-text"></p>
     </div>
   </div>
-  <div class="container">
-    <div class="text-wrapper">
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
-    </div>
+  <div class="container entry" data-text="everything is runimed / we're domed / nothing can save us / we're all going to die">
+    <img class="background-img" src="image1.jpg">
   </div>
-  <div class="container">
-    <div class="text-wrapper">
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
-      <p class="text">everything is runimed / we’ re domed / nothing can save us / we’re all going to die</p>
-    </div>
+  <div class="container entry" data-text="e.seven costumes, / eadig the forefront of Engtand. / and always give you a fresn / exoedence,continuous innovation is / the purpose of e.seven clothing">
+    <img class="background-img" src="image2.jpg">
   </div>
   <script src="background-check.js"></script>
   <script>
     window.onload = () => {
-      let texts = document.getElementsByClassName('text');
-      [].forEach.call(texts, (text) => {
-        let innerHTML = text.innerHTML;
-        let chars = innerHTML.split('');
+      let backgroundCheck = () => {
+        BackgroundCheck.init({
+          targets: '.text-frag',
+          images: '.background-img',
+          threshold: 55,
+        });
+      }
 
-        let newInner = '';
-        chars.forEach((char) => {
-          newInner += `<span class="text-frag">${char}</span>`;
-        })
+      let processText = () => {
+        let texts = document.getElementsByClassName('text');
+        [].forEach.call(texts, (text) => {
+          let innerHTML = text.innerHTML;
+          let chars = innerHTML.split('');
 
-        text.innerHTML = newInner;
-      });
-      BackgroundCheck.init({
-        targets: '.text-frag',
-        images: '.background-img',
-      });
+          let newInner = '';
+          chars.forEach((char) => {
+            newInner += `<span class="text-frag">${char}</span>`;
+          })
+
+          text.innerHTML = newInner;
+        });
+      }
+
+      let initScroll = () => {
+       window.addEventListener('scroll', () => {
+         // const scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
+
+         let entries = document.getElementsByClassName('entry');
+         [].forEach.call(entries, (entry) => {
+           let top = entry.getBoundingClientRect().top;
+           if (top < window.innerHeight/2 && top > -window.innerHeight/2) {
+             let newEntryText = entry.dataset.text;
+             if (entryText !== newEntryText) {
+               entryText = newEntryText;
+               entryTextElement.innerHTML = entryText;
+               processText();
+               backgroundCheck();
+             }
+           }
+         });
+       });
+      }
+
+      let entryText = document.getElementsByClassName('entry')[0].dataset.text;
+      let entryTextElement = document.getElementById('entry-text');
+
+      entryTextElement.innerHTML = entryText;
+
+      processText();
+      initScroll();
+      backgroundCheck();
     }
   </script>
 </body>
