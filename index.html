@@ -1,4 +1,6 @@
 <head>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.target-densityDpi=device-dpi" />
+
 <style>
   body, html, p {
     margin: 0;
@@ -24,11 +26,17 @@
 
   .text-wrapper {
     font-family: sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     position: fixed;
     bottom: 40px;
     width: calc(100% - 40px * 2);
     left: 40px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .text-wrapper {
+      font-size: 24px;
+    }
   }
 
   .background--light {
@@ -47,11 +55,45 @@
     </div>
   </div>
   <div class="container entry" data-text="everything is runimed / we're domed / nothing can save us / we're all going to die">
-    <img class="background-img" src="image1.jpg">
+    <img class="background-img" src="images/image1.jpg">
   </div>
   <div class="container entry" data-text="e.seven costumes, / eadig the forefront of Engtand. / and always give you a fresn / exoedence,continuous innovation is / the purpose of e.seven clothing">
-    <img class="background-img" src="image2.jpg">
+    <img class="background-img" src="images/image2.jpg">
   </div>
+  <div class="container entry" data-text="Disney Fonts">
+    <img class="background-img" src="images/disney fonts.jpg">
+  </div>
+  <div class="container entry" data-text="Murano d'Italia">
+    <img class="background-img" src="images/BVBZ3234.jpg">
+  </div>
+  <div class="container entry" data-text="ITHOUGHT / ART WORLD / BE MY LIFE / CREATIVE">
+    <img class="background-img" src="images/DPVQ8760.jpg">
+  </div>
+  <div class="container entry" data-text="J'arrive">
+    <img class="background-img" src="images/EGTQ7084.jpg">
+  </div>
+  <div class="container entry" data-text="WHEN I WAS LITTLE, / I NEVER THOUGHT / EYEBROWS WOULD / BE THIS IMPORTANT">
+    <img class="background-img" src="images/IMG_6978.jpg">
+  </div>
+  <div class="container entry" data-text="CHANGE / BRAVE / TO MAKE / A / CHANGE">
+    <img class="background-img" src="images/IMG_6979.jpg">
+  </div>
+  <div class="container entry" data-text="Joy girly / Independent">
+    <img class="background-img" src="images/IMG_7199 (1).jpg">
+  </div>
+  <div class="container entry" data-text="ART SHOW / UTOPIA">
+    <img class="background-img" src="images/IMG_7292.jpg">
+  </div>
+  <div class="container entry" data-text="SMILE / UNTIL THE / TEARS / RUN INTO / YOUR MOUTH">
+    <img class="background-img" src="images/IMG_7352.jpg">
+  </div>
+  <div class="container entry" data-text="MDIV / MUSIUM DIV.">
+    <img class="background-img" src="images/IMG_7357.jpg">
+  </div>
+  <div class="container entry" data-text="LET'S BE / * MY SELF *">
+    <img class="background-img" src="images/IMG_7370.jpg">
+  </div>
+
   <script src="background-check.js"></script>
   <script>
     window.onload = () => {
@@ -59,7 +101,7 @@
         BackgroundCheck.init({
           targets: '.text-frag',
           images: '.background-img',
-          threshold: 55,
+          threshold: 50,
         });
       }
 
@@ -83,9 +125,10 @@
          // const scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
 
          let entries = document.getElementsByClassName('entry');
+         let bound = entryTextElement.getBoundingClientRect().top + entryTextElement.offsetHeight / 2;
          [].forEach.call(entries, (entry) => {
            let top = entry.getBoundingClientRect().top;
-           if (top < window.innerHeight/2 && top > -window.innerHeight/2) {
+           if (top < bound && top > bound-window.innerHeight) {
              let newEntryText = entry.dataset.text;
              if (entryText !== newEntryText) {
                entryText = newEntryText;
@@ -93,6 +136,7 @@
                processText();
                backgroundCheck();
              }
+             return;
            }
          });
        });
@@ -100,7 +144,6 @@
 
       let entryText = document.getElementsByClassName('entry')[0].dataset.text;
       let entryTextElement = document.getElementById('entry-text');
-
       entryTextElement.innerHTML = entryText;
 
       processText();
