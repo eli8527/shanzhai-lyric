@@ -1,0 +1,5 @@
+- google vision api
+https://cloud.google.com/vision/docs/drag-and-drop
+
+- bit map image masking?
+- auto scroll

@@ -2,19 +2,30 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.target-densityDpi=device-dpi" />
 
 <style>
+  html {
+    scroll-behavior: smooth;
+  }
+
   body, html, p {
     margin: 0;
     padding: 0;
   }
+
   .container {
-    /* width: 100vw;
-    height: 100vh;
-    position: relative; */
+    position: relative;
   }
+
   img {
     width: 100%;
     height: auto;
     /* object-fit: cover; */
+  }
+
+  .background-img-bmp {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
   }
 
   .fixed {
@@ -25,8 +36,8 @@
   }
 
   .text-wrapper {
-    font-family: sans-serif;
-    font-size: 38px;
+    font-family: Arial, sans-serif;
+    font-size: 80px;
     position: fixed;
     bottom: 40px;
     width: calc(100% - 40px * 2);
@@ -56,42 +67,55 @@
   </div>
   <div class="container entry" data-text="everything is runimed / we're domed / nothing can save us / we're all going to die">
     <img class="background-img" src="images/image1.jpg">
+    <img class="background-img-bmp" src="images/image1-bmp.jpg">
   </div>
   <div class="container entry" data-text="e.seven costumes, / eadig the forefront of Engtand. / and always give you a fresn / exoedence,continuous innovation is / the purpose of e.seven clothing">
     <img class="background-img" src="images/image2.jpg">
+    <img class="background-img-bmp" src="images/image2-bmp.jpg">
   </div>
   <div class="container entry" data-text="Disney Fonts">
     <img class="background-img" src="images/disney fonts.jpg">
+    <img class="background-img-bmp" src="images/disney fonts-bmp.jpg">
   </div>
   <div class="container entry" data-text="Murano d'Italia">
     <img class="background-img" src="images/BVBZ3234.jpg">
+    <img class="background-img-bmp" src="images/BVBZ3234-bmp.jpg">
   </div>
   <div class="container entry" data-text="ITHOUGHT / ART WORLD / BE MY LIFE / CREATIVE">
     <img class="background-img" src="images/DPVQ8760.jpg">
+    <img class="background-img-bmp" src="images/DPVQ8760-bmp.jpg">
   </div>
   <div class="container entry" data-text="J'arrive">
     <img class="background-img" src="images/EGTQ7084.jpg">
+    <img class="background-img-bmp" src="images/EGTQ7084-bmp.jpg">
   </div>
   <div class="container entry" data-text="WHEN I WAS LITTLE, / I NEVER THOUGHT / EYEBROWS WOULD / BE THIS IMPORTANT">
     <img class="background-img" src="images/IMG_6978.jpg">
+    <img class="background-img-bmp" src="images/IMG_6978-bmp.jpg">
   </div>
   <div class="container entry" data-text="CHANGE / BRAVE / TO MAKE / A / CHANGE">
     <img class="background-img" src="images/IMG_6979.jpg">
+    <img class="background-img-bmp" src="images/IMG_6979-bmp.jpg">
   </div>
   <div class="container entry" data-text="Joy girly / Independent">
     <img class="background-img" src="images/IMG_7199 (1).jpg">
+    <img class="background-img-bmp" src="images/IMG_7199 (1)-bmp.jpg">
   </div>
   <div class="container entry" data-text="ART SHOW / UTOPIA">
     <img class="background-img" src="images/IMG_7292.jpg">
+    <img class="background-img-bmp" src="images/IMG_7292-bmp.jpg">
   </div>
   <div class="container entry" data-text="SMILE / UNTIL THE / TEARS / RUN INTO / YOUR MOUTH">
     <img class="background-img" src="images/IMG_7352.jpg">
+    <img class="background-img-bmp" src="images/IMG_7352-bmp.jpg">
   </div>
   <div class="container entry" data-text="MDIV / MUSIUM DIV.">
     <img class="background-img" src="images/IMG_7357.jpg">
+    <img class="background-img-bmp" src="images/IMG_7357-bmp.jpg">
   </div>
   <div class="container entry" data-text="LET'S BE / * MY SELF *">
     <img class="background-img" src="images/IMG_7370.jpg">
+    <img class="background-img-bmp" src="images/IMG_7370-bmp.jpg">
   </div>
 
   <script src="background-check.js"></script>
@@ -100,8 +124,8 @@
       let backgroundCheck = () => {
         BackgroundCheck.init({
           targets: '.text-frag',
-          images: '.background-img',
-          threshold: 55,
+          images: '.background-img-bmp',
+          threshold: 50,
         });
       }
 
